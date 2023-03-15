@@ -129,7 +129,7 @@
 </template> -->
 
 
-<script setup>
+<script lang="ts" setup>
 
 console.log("My Garage test");
 
