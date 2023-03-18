@@ -6,6 +6,10 @@
 
 <script lang="ts" setup>
 
-  console.log("View test");
-  
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  console.log('View mounted.')
+})
+
 </script>

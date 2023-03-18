@@ -10,7 +10,10 @@
 
 import DefaultBar from './AppBar.vue'
 import DefaultView from './View.vue'
+import { onMounted } from 'vue';
 
-console.log("Default test");
+onMounted(() => {
+  console.log('Default mounted.')
+})
 
 </script>

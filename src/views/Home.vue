@@ -5,7 +5,10 @@
 <script lang="ts" setup>
 
 import MyGarage from '@/components/MyGarage.vue';
+import { onMounted } from 'vue';
 
-console.log("Home test");
+onMounted(() => {
+  console.log('Home mounted.')
+})
 
 </script>

@@ -4,6 +4,10 @@
 
 <script lang="ts" setup>
 
-console.log("App test");
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  console.log('App mounted.')
+})
 
 </script>

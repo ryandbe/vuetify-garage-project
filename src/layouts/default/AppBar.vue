@@ -8,7 +8,8 @@
     <!-- {{ count }} -->
 
     <v-responsive class="mx-auto" max-width="344">
-      <v-text-field v-model="searchString" label="Search" placeholder="Enter Search String" hide-details="auto"></v-text-field>
+      <v-text-field v-model="searchString" label="Search" placeholder="Enter Search String"
+        hide-details="auto"></v-text-field>
     </v-responsive>
 
     <template v-slot:append>
@@ -18,16 +19,15 @@
   </v-app-bar>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import { ref, onMounted } from 'vue';
-
-console.log("AppBar test");
 
 //reactive state
 //const count = ref(0);
 const searchString = ref("");
 
+//function to mutate state and trigger updates
 function searchIconClicked() {
   //count.value++;
   console.log(searchString.value);
@@ -36,6 +36,7 @@ function searchIconClicked() {
 //lifecycle hooks
 onMounted(() => {
   //console.log(`The initial count is ${count.value}.`);
+  console.log("AppBar mounted");
   console.log(`The initial search string is ${searchString.value}.`);
 })
 
