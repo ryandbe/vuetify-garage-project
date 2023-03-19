@@ -36,7 +36,7 @@ function searchIconClicked() {
 //lifecycle hooks
 onMounted(() => {
   //console.log(`The initial count is ${count.value}.`);
-  console.log("AppBar mounted");
+  console.log("AppBar mounted.");
   console.log(`The initial search string is ${searchString.value}.`);
 })
 

@@ -1,7 +1,9 @@
 <template>
+    <v-switch :label="`${tableTheme}`" color="black" v-model="tableTheme" :true-value="darkModeString"
+        :false-value="lightModeString" inset hide-details></v-switch>
     <v-container class="fill-height">
         <v-responsive class="d-flex align-center text-center fill-height">
-            <v-table theme="dark">
+            <v-table :theme="getTheme()">
                 <thead>
                     <tr>
                         <th class="text-center">
@@ -66,6 +68,12 @@ import { ref, onMounted } from 'vue';
 
 //const searchString = ref("");
 
+const lightModeString = "Light Mode";
+const darkModeString = "Dark Mode";
+
+//on reload default mode is light mode
+const tableTheme = ref(lightModeString);
+
 const bikes = ref([
     {
         manufacturer: "Ducati",
@@ -119,6 +127,10 @@ function clickedPanigaleV4() {
 
 function clickedScoutBobber() {
     console.log("clickedScoutBobber");
+}
+
+function getTheme() {
+    return tableTheme.value == darkModeString ? 'dark' : 'light';
 }
 
 onMounted(() => {
