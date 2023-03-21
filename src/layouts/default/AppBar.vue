@@ -1,20 +1,20 @@
 <template>
   <v-app-bar flat>
-    <v-app-bar-title>
-      <v-app-bar-nav-icon />
-      My Garage
-    </v-app-bar-title>
 
-    <!-- {{ count }} -->
+    <v-app-bar-nav-icon />
 
-    <v-responsive class="mx-auto" max-width="344">
+    <v-app-bar-title>My Garage</v-app-bar-title>
+
+    <!-- <v-responsive class="mx-auto" max-width="344">
       <v-text-field v-model="searchString" label="Search" placeholder="Enter Search String"
         hide-details="auto"></v-text-field>
-    </v-responsive>
+    </v-responsive> -->
 
-    <template v-slot:append>
+    <!-- <template v-slot:append>
       <v-btn icon="mdi-magnify" @click="searchIconClicked"></v-btn>
-    </template>
+    </template> -->
+
+    <!-- <v-btn icon="mdi-magnify" @click="searchIconClicked"></v-btn> -->
 
   </v-app-bar>
 </template>
@@ -24,18 +24,15 @@
 import { ref, onMounted } from 'vue';
 
 //reactive state
-//const count = ref(0);
 const searchString = ref("");
 
 //function to mutate state and trigger updates
 function searchIconClicked() {
-  //count.value++;
   console.log(searchString.value);
 }
 
 //lifecycle hooks
 onMounted(() => {
-  //console.log(`The initial count is ${count.value}.`);
   console.log("AppBar mounted.");
   console.log(`The initial search string is ${searchString.value}.`);
 })
