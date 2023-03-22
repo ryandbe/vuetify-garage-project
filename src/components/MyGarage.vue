@@ -4,7 +4,7 @@
 
     <v-responsive class="mx-auto" max-width="344">
         <v-text-field v-model="searchString" label="Search" placeholder="Enter Search String"
-            hide-details="auto"></v-text-field>
+            hide-details="auto" prepend-inner-icon="mdi-magnify" clearable @click:clear="searchString == null"></v-text-field>
     </v-responsive>
 
     <v-container class="fill-height">
@@ -80,28 +80,14 @@ const darkModeString = "Dark Mode";
 //on reload default mode is light mode
 const tableTheme = ref(lightModeString);
 
-class Bikes {
-    bikes: Bike[] = [];
-    constructor() {
-        let bike1 = new Bike("Ducati", "Monster 821 Stealth", "109 hp (80 kW)", "The Monster 821 pays homage to the legacy of the Monster 900, which over 25 years ago revolutionized the motorcycle world. Agile and featuring sporty performance, it was designed for maximum riding enjoyment, at all times and in all conditions.  The Monster 821 range has been rejuvenated with a new stealth version: matte black livery, updated graphics and front fairing give a unique character to the naked Ducati par excellence.", "Stealth Black", "821 cc", "2020");
-        let bike2 = new Bike("BMW", "F 750 GS", "77 hp (at 7,500 rpm)", "The BMW F 750 GS is your ticket to adventure. With this balanced Enduro all-rounder, you can master all paths and expand your horizons. The F 750 GS gives you more power, more comfort, more spirit of GS. Feel the strong-charactered engine and enjoy the ease of handling of the F 750 GS. While you're off discovering the world, you have the bike safely under control with the Automatic Stability Control (ASC) and ABS. With the additional option Connectivity, the 6.5 inch TFT-display boasts many features including navigation and smartphone connectivity.", "Austin Yellow Metallic", "853 cc", "2020");
-        let bike3 = new Bike("Indian", "Scout Bobber", "100 hp", "Stripped down and blacked out with an aggressive stance and raw power, the Scout Bobber is a modern take on the iconic bobber style.", "Black", "1,133 cc", "2020");
-        let bike4 = new Bike("Ducati", "Panigale V4", "157.5 kW (214 hp)", "The 2020 version of the Panigale V4 boosts performance even further and takes track riding to the next level for amateurs and pros alike.", "Ducati Red", "1,103 cc", "2020");
-        this.bikes.push(bike1);
-        this.bikes.push(bike2);
-        this.bikes.push(bike3);
-        this.bikes.push(bike4);
-    }
-}
-
-class Bike {
-    manufacturer: string;
-    model: string;
-    power: string;
-    description: string;
-    color: string;
-    displacement: string;
-    year: string;
+abstract class GarageItem {
+    manufacturer: string = "";
+    model: string = "";
+    power: string = "";
+    description: string = "";
+    color: string = "";
+    displacement: string = "";
+    year: string = "";
     constructor(manufacturer: string, model: string, power: string, description: string, color: string, displacement: string, year: string) {
         this.manufacturer = manufacturer;
         this.model = model;
@@ -110,6 +96,28 @@ class Bike {
         this.color = color;
         this.displacement = displacement;
         this.year = year;
+    }
+}
+
+class Bike extends GarageItem {
+    super(manufacturer: string, model: string, power: string, description: string, color: string, displacement: string, year: string) {
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.power = power;
+        this.description = description;
+        this.color = color;
+        this.displacement = displacement;
+        this.year = year;
+    }
+}
+
+class Bikes {
+    bikes: Bike[] = [];
+    constructor() {
+        this.bikes.push(new Bike("Ducati", "Monster 821 Stealth", "109 hp (80 kW)", "The Monster 821 pays homage to the legacy of the Monster 900, which over 25 years ago revolutionized the motorcycle world. Agile and featuring sporty performance, it was designed for maximum riding enjoyment, at all times and in all conditions.  The Monster 821 range has been rejuvenated with a new stealth version: matte black livery, updated graphics and front fairing give a unique character to the naked Ducati par excellence.", "Stealth Black", "821 cc", "2020"));
+        this.bikes.push(new Bike("BMW", "F 750 GS", "77 hp (at 7,500 rpm)", "The BMW F 750 GS is your ticket to adventure. With this balanced Enduro all-rounder, you can master all paths and expand your horizons. The F 750 GS gives you more power, more comfort, more spirit of GS. Feel the strong-charactered engine and enjoy the ease of handling of the F 750 GS. While you're off discovering the world, you have the bike safely under control with the Automatic Stability Control (ASC) and ABS. With the additional option Connectivity, the 6.5 inch TFT-display boasts many features including navigation and smartphone connectivity.", "Austin Yellow Metallic", "853 cc", "2020"));
+        this.bikes.push(new Bike("Indian", "Scout Bobber", "100 hp", "Stripped down and blacked out with an aggressive stance and raw power, the Scout Bobber is a modern take on the iconic bobber style.", "Black", "1,133 cc", "2020"));
+        this.bikes.push(new Bike("Ducati", "Panigale V4", "157.5 kW (214 hp)", "The 2020 version of the Panigale V4 boosts performance even further and takes track riding to the next level for amateurs and pros alike.", "Ducati Red", "1,103 cc", "2020"));
     }
 }
 
@@ -137,7 +145,7 @@ function getTheme() {
 
 function filteredSearchList() {
 
-    //console.log(searchString.value);
+    if (!searchString.value) return bikes.bikes;
 
     let searchResults = new Set<Bike>();
 
